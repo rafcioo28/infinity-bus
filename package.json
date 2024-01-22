@@ -1,0 +1,48 @@
+{
+  "name": "infinity-bus",
+  "version": "1.0.0",
+  "description": "Infinity bus wordpress plugin",
+  "scripts": {
+    "build-block": "wp-scripts build --webpack-src-dir=assets/blocks --output-path=public/block-build",
+    "start-block": "wp-scripts start --webpack-src-dir=assets/blocks --output-path=public/block-build",
+    "dev": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "production": "mix --production"
+  },
+  "author": "Rafał Herszkowicz",
+  "license": "ISC",
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "devDependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "@wordpress/scripts": "^26.0.0",
+    "@wordpress/server-side-render": "^4.21.0",
+    "acorn": "^8.7.0",
+    "ajv": "^8.11.0",
+    "autoprefixer": "^10.4.4",
+    "browser-sync": "^2.27.9",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "copy-webpack-plugin": "^10.2.4",
+    "cross-env": "^7.0.3",
+    "image-minimizer-webpack-plugin": "^3.2.3",
+    "imagemin": "^7.0.1",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^10.0.1",
+    "laravel-mix": "^6.0.43",
+    "laravel-mix-imagemin": "^1.0.3",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "svgo-loader": "^3.0.0"
+  },
+  "dependencies": {
+    "@splidejs/react-splide": "^0.7.12",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "@wordpress/api-fetch": "^6.28.0"
+  }
+}

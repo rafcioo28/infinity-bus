@@ -1,0 +1,124 @@
+// =============================================================================
+// 1. Disable user selection
+// 2. Truncate single line text
+// 3. Truncate multi line text
+// 4. PX to REM
+// 5. Aspect ratio
+// 6. Row
+// 7. Custom media queries up
+// 8. Custom media queries down
+// 9. Custom media queries between
+// 10. Custom transitions
+// =============================================================================
+
+// 1. Disable user selection
+// =============================================================================
+@use "sass:math";
+
+@mixin nonselect {
+  user-select: none;
+}
+
+// 2. Truncate single line text
+// =============================================================================
+@mixin truncateText($overflow: ellipsis) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: $overflow; // values are: clip, ellipsis, or a string
+}
+
+// 3. Truncate multi line text
+// =============================================================================
+@mixin truncateLines($lines) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}
+
+// 4. PX to REM
+// =============================================================================
+@function rem($size) {
+  $remSize: calc( $size / $base-font-size );
+  @return $remSize * 1rem;
+}
+
+// 5. Aspect ratio
+// =============================================================================
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+
+  &::before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: calc(($height / $width) * 100%);
+  }
+
+  >.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+// 6. Row
+// =============================================================================
+@mixin row() {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+// 7. Custom media queries up
+// =============================================================================
+@mixin media-breakpoint-up($breakpoint) {
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($grid-breakpoints, $breakpoint);
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// 8. Custom media queries down
+@mixin media-breakpoint-down($breakpoint) {
+  @if map-has-key($grid-breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($grid-breakpoints, $breakpoint);
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// 9. Custom media queries between
+@mixin media-breakpoint-between($lower, $upper) {
+  @if map-has-key($grid-breakpoints, $lower) and map-has-key($grid-breakpoints, $upper) {
+    $lower-breakpoint: map-get($grid-breakpoints, $lower);
+    $upper-breakpoint: map-get($grid-breakpoints, $upper);
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  } @else {
+    @if (map-has-key($grid-breakpoints, $lower) == false) {
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+    @if (map-has-key($grid-breakpoints, $upper) == false) {
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
+
+// 10. Custom transitions
+// =============================================================================
+@mixin transition($property: all, $duration: $default-transition-duration, $timing: $default-transition-timing, $delay: 0s) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $timing;
+  transition-delay: $delay;
+}

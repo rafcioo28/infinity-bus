@@ -1,0 +1,19 @@
+{
+  "name": "infinityloop/infinity-bus",
+    "require": {
+      "php": ">=7.4"
+    },
+    "config": {
+      "platform": {
+        "php": "7.4.0"
+      },
+      "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "wp-coding-standards/wpcs": "^2.3"
+    }
+}
